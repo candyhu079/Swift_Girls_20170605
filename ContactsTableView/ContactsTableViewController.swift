@@ -21,7 +21,13 @@ class ContactsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         // 抓取手機裡的聯絡人資料
-        //getContacts()
+        CNContactStore().requestAccess(for: .contacts) { _ in
+            self.getContacts()
+
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,7 +82,7 @@ class ContactsTableViewController: UITableViewController {
             }
             
         } catch {
-            
+            print("Error")
         }*/
     }
 
